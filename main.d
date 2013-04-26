@@ -1,0 +1,12 @@
+main.o: main.c
+main.o: C:\Keil\ARM\RV31\Inc\stdio.h
+main.o: ..\inc/hw_types.h
+main.o: ..\driverlib/sysctl.h
+main.o: ..\inc\lm3s1968.h
+main.o: adc.h
+main.o: rit128x96x4.h
+main.o: Output.h
+main.o: systickints.h
+main.o: ..\inc/hw_memmap.h
+main.o: ..\driverlib/adc.h
+main.o: ..\driverlib/gpio.h
