@@ -40,6 +40,7 @@ int main (void){
 		else if (ADCValues[1] < 420) YPos = -1;
 		else YPos = 0;
 		PortG = !GPIOPinRead(GPIO_PORTG_BASE, GPIO_PIN_7);
+		
 		printf("X Raw:				%d\r",ADCValues[0]);
 		printf("Y Raw:				%d\r",ADCValues[1]);
 		printf("X Calibrated: %d \r",XPos);

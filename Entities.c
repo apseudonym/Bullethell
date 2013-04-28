@@ -1,35 +1,22 @@
-// This file contains the entity definitions as well as movement algorithms for said entities
+// This file contains the entity movement algorithms for said entities
 
-/* This is the struct for the player. Contains movement speed, X and Y position, and sprite */
-typdef struct {
-	long X,
-	long Y,
-	long speed,
-	
-} player;
+#include "entities.h"
 
-/* This is the struct for a weak enemy. Contains function pointer to X and Y position, sprite, time its been living, and hitpoints */
-typedef struct {
-	void (*Position)(time),
-	//put in sprite here
-	long time,
-	long hitpoints,
-} wEnemey;
+void fairy (long time, long* XPos, long* YPos, char* xdirection, char* ydirection){
+	if (*XPos >= 128){
+		*xdirection = *xdirection * (-1);
+	}
+	*XPos = time + (2*(*xdirection));
+	*YPos = time + 1;
+}
 
-/*This is the struct for a stronger enemy. Contains function pointer to X and Y positions, sprite, and hitpoints */
-typdef struct {
-	void (*Position)(time),
-	//put in sprite here
-	long time,
-	long hitpoints,
-} sEnemy;
-
-typedef struct {
-	
-	
-} sBullets;
-
-typedef struct {
-	
-	
-} lBullets;
+void death_fairy (long time, long* XPos, long* YPos, char* xdirection, char* ydirection){
+	if (*XPos >= 128){
+		*xdirection = *xdirection*(-1);
+	}
+	if (*YPos > 40){
+		*ydirection = *ydirection*(-1);
+	}
+	*XPos = time + (3*(*xdirection));
+	*YPos = time + (2*(*ydirection));
+}
