@@ -1,5 +1,10 @@
 //*****************************************************************************
 //
+// *NOTE*
+// Functions after "RIT128x96x4DisplayOff" were created by Yifan Weng
+// These functions are part of an open source library created for the
+// RIT 128x96x4 OLED display
+//
 // rit128x96x4.c - Driver for the RIT 128x96x4 graphical OLED display.
 //
 // Copyright (c) 2007-2010 Texas Instruments Incorporated.  All rights reserved.
@@ -49,6 +54,9 @@
 #define GPIO_OLEDDC_BASE            GPIO_PORTH_BASE
 #define GPIO_OLEDDC_PIN             GPIO_PIN_2
 #define GPIO_OLEDEN_PIN             GPIO_PIN_3
+#define BITMAP_HEADER_SIZE 0x76
+#define BITMAP_WIDTH_OFFSET 0x12
+#define BITMAP_HEIGHT_OFFSET 0x16
 
 //*****************************************************************************
 //
@@ -915,6 +923,63 @@ RIT128x96x4DisplayOff(void)
     // Put the display to sleep.
     //
     RITWriteCommand(pucCommand1, sizeof(pucCommand1));
+}
+
+
+unsigned char RAMImageBuffer[NUM_ROWS][NUM_COLS/2];
+
+//*************RIT128x96x4_ClearImage************************************** 
+//  Clears the RAM version of the image 
+//  Inputs: none 
+//  Outputs: none 
+void RIT128x96x4_ClearImage(void){
+	int i,j;
+	for (i = 0; i<NUM_ROWS; i++)
+	for(j = 0;	j<(NUM_COLS/2); j++)
+	RAMImageBuffer[i][j]=0x00;
+} 
+
+//*************RIT128x96x4_Pixel************************************** 
+//  Sets one pixel in the RAM version of the image 
+//  Inputs: (x,y) is the location of the pixel
+//	color is 0 (off) to 15 (white) 
+//  Outputs: none 
+void RIT128x96x4_SetPixel(int x, int y, unsigned char color){
+	RAMImageBuffer[x][y>>1] &= (y&0x1)?(0xF0):(0x0F);
+	RAMImageBuffer[x][y>>1] |= (y&0x1)?color:(color<<4);
+} 
+//*************RIT128x96x4_Pixel************************************** 
+//  Sets one pixel in the RAM version of the image 
+//  Inputs: (x,y) is the location of the pixel
+//	color is 0 (off) to 15 (white) 
+//  Outputs: color at pixel 
+unsigned char RIT128x96x4_GetPixel(int x, int y){
+	return (y&0x1)?(RAMImageBuffer[x][y>>1]&0x0F):(RAMImageBuffer[x][y>>1]>>4);
+} 
+
+//*************RIT128x96x4_LoadImage************************************** 
+//  Loads a sizeX by sizeY 4-bit bitmap into the RAMImageBuffer starting at location (x,y)  
+//  Inputs:  
+//  Outputs: none 
+void RIT128x96x4_LoadImage(const unsigned char* bitmap, int x, int y){
+ 	int i, j,sizeX,sizeY;
+	sizeX = (unsigned long)bitmap[BITMAP_HEIGHT_OFFSET];
+  sizeY = (unsigned long)bitmap[BITMAP_WIDTH_OFFSET];
+	for(i = x; i < sizeX; i++){
+		for(j = y; j < (sizeY>>1); j++){
+			RAMImageBuffer[i][j] = bitmap[BITMAP_HEADER_SIZE + (( NUM_ROWS - i ) * (sizeY>>1)) + j];
+		}
+	}
+}
+
+//*************RIT128x96x4_ShowImage************************************** 
+//  Copies the RAM version of the image to the OLED 
+//  Inputs: none 
+//  Outputs: none 
+void RIT128x96x4_ShowImage(void){
+	int i;
+	for(i = 0; i<NUM_ROWS;i++)
+	RIT128x96x4ImageDraw(RAMImageBuffer[i], 0,i, NUM_COLS, 1);
 }
 
 //*****************************************************************************

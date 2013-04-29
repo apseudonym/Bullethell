@@ -26,6 +26,12 @@
 #ifndef __RIT128X96X4_H__
 #define __RIT128X96X4_H__
 
+
+#define NUM_ROWS 96
+#define NUM_COLS 128
+
+
+
 //*****************************************************************************
 //
 // Prototypes for the driver APIs.
@@ -46,5 +52,10 @@ extern void RIT128x96x4Enable(unsigned long ulFrequency);
 extern void RIT128x96x4Disable(void);
 extern void RIT128x96x4DisplayOn(void);
 extern void RIT128x96x4DisplayOff(void);
+void RIT128x96x4_ClearImage(void);
+void RIT128x96x4_SetPixel(int x, int y, unsigned char color);
+unsigned char RIT128x96x4_GetPixel(int x, int y);
+void RIT128x96x4_LoadImage(const unsigned char* bitmap, int x, int y);
+void RIT128x96x4_ShowImage(void);
 
 #endif // __RIT128X96X4_H__

@@ -430,6 +430,16 @@
               <FileType>1</FileType>
               <FilePath>.\SysTickInts.c</FilePath>
             </File>
+            <File>
+              <FileName>Entities.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Entities.c</FilePath>
+            </File>
+            <File>
+              <FileName>Controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Controller.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
