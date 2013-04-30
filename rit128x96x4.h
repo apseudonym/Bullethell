@@ -52,6 +52,13 @@ extern void RIT128x96x4Enable(unsigned long ulFrequency);
 extern void RIT128x96x4Disable(void);
 extern void RIT128x96x4DisplayOn(void);
 extern void RIT128x96x4DisplayOff(void);
+
+
+//******************************
+//
+// Prototypes of new functions
+//
+//******************************
 void RIT128x96x4_ClearImage(void);
 void RIT128x96x4_SetPixel(int x, int y, unsigned char color);
 unsigned char RIT128x96x4_GetPixel(int x, int y);

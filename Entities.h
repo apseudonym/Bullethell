@@ -1,5 +1,6 @@
 // This file contains the entity definitions
 
+
 /* This is the struct for the player. Contains movement speed, X and Y position, and sprite */
 typedef struct {
 	long X;
@@ -30,3 +31,5 @@ void cirno (long time, long* XPos, long* YPos, char* xdirection, char* ydirectio
 void bullets (long time, long* XPos, long* YPos);
 void bulletl (long time, long* XPos, long* YPos);
 void bulletr (long time, long* XPos, long* YPos);
+
+

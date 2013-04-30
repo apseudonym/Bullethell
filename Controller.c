@@ -7,6 +7,7 @@ It is calibrated to provide directional input in terms of positive or negative v
 #include <stdio.h>
 #include "inc/hw_types.h"
 #include "inc/hw_memmap.h"
+#include "driverlib/sysctl.h"
 #include "driverlib/gpio.h"
 #include "adc.h"
 #include "controller.h"
@@ -18,6 +19,8 @@ unsigned long ADCValues[2];
 
 //CTLRInit exists just so I didn't have to include adc.h in the main file
 void CTLRInit(void){
+	SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOG);
+	GPIOPinTypeGPIOInput(GPIO_PORTG_BASE, GPIO_PIN_7);
 	InitAdcPorts();
 }
 
@@ -36,8 +39,8 @@ void Ctlread(long* X, long* Y, long* button){
 
 /* Controller test code, displays raw X and Y positions as well
  as calibrated values and whether a button is pressed or not */
-void ControllerTest(void){long *XPos, *YPos, *Button;
-		Ctlread(XPos, YPos, Button);
+void CTLRTest(void){long XPos, YPos, Button;
+		Ctlread(&XPos, &YPos, &Button);
 		printf("X Raw:				%d\r",ADCValues[0]);
 		printf("Y Raw:				%d\r",ADCValues[1]);
 		printf("X Calibrated: %d \r",XPos);

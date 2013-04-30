@@ -43,8 +43,8 @@ void Output_Init(void);
 // Resets Cursor location to the beginning of the screen
 // Input: none
 // Output: none
-
 void Output_Cursor_Reset(void);
+
 //------------Output_Clear------------
 // Clears the OLED display.
 // Input: none

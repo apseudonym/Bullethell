@@ -3,7 +3,7 @@
 // *NOTE*
 // Functions after "RIT128x96x4DisplayOff" were created by Yifan Weng
 // These functions are part of an open source library created for the
-// RIT 128x96x4 OLED display
+// RIT 128x96x4 OLED display obtained at http://github.com/weng-frank/RTOS
 //
 // rit128x96x4.c - Driver for the RIT 128x96x4 graphical OLED display.
 //
@@ -962,12 +962,12 @@ unsigned char RIT128x96x4_GetPixel(int x, int y){
 //  Inputs:  
 //  Outputs: none 
 void RIT128x96x4_LoadImage(const unsigned char* bitmap, int x, int y){
- 	int i, j,sizeX,sizeY;
+ 	int i, j, sizeX, sizeY;
 	sizeX = (unsigned long)bitmap[BITMAP_HEIGHT_OFFSET];
   sizeY = (unsigned long)bitmap[BITMAP_WIDTH_OFFSET];
-	for(i = x; i < sizeX; i++){
-		for(j = y; j < (sizeY>>1); j++){
-			RAMImageBuffer[i][j] = bitmap[BITMAP_HEADER_SIZE + (( NUM_ROWS - i ) * (sizeY>>1)) + j];
+	for(i = 0; i < (sizeX); i++){
+		for(j = 0; j < ((sizeY)>>1); j++){
+			RAMImageBuffer[i+x][j+(y>>1)] = bitmap[BITMAP_HEADER_SIZE + (( NUM_ROWS -i ) * (sizeY>>1)) + j];
 		}
 	}
 }
