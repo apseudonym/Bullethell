@@ -440,6 +440,21 @@
               <FileType>1</FileType>
               <FilePath>.\Controller.c</FilePath>
             </File>
+            <File>
+              <FileName>DAC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DAC.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>movingbits.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\movingbits.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

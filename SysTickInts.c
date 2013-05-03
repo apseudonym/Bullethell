@@ -51,3 +51,20 @@ void SysTick_Init(unsigned long period){
 	EnableInterrupts();
 }
 
+void Timer0A_Init(void){
+  int TakeUpSpace;
+  SYSCTL_RCGC1_R |= SYSCTL_RCGC1_TIMER0;
+  TakeUpSpace = 1;
+  TakeUpSpace++;  //i put this here basically as NOPs
+  TIMER0_CTL_R &= ~0x00000001;
+  TIMER0_CFG_R = 0x00000004;
+  TIMER0_TAMR_R = 0x00000002;  //makes it periodic
+  TIMER0_TAILR_R = 20000;  //sets the reload value for 1000
+  TIMER0_TAPR_R = 49;  //sets it to coutdown every microsecond
+  TIMER0_ICR_R = 1;
+  TIMER0_IMR_R |= 1;
+  NVIC_PRI4_R = (NVIC_PRI4_R&0x00FFFFFF) | 0x60000000;  //sets priority 1
+  NVIC_EN0_R |= NVIC_EN0_INT19;
+  TIMER0_CTL_R |= 1;
+	EnableInterrupts();
+}

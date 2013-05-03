@@ -10,7 +10,7 @@ void CTLRInit(void);
 // Input: X, Y, and Button addresses
 // Output: technically none, but it stores
 // values in the address of the input
-void Ctlread(long* X, long* Y, long* button);
+void CTLRRead(long* X, long* Y, long* button);
 
 //-------------Controller Test---------------
 // Tests the controller code and outputs the
@@ -19,3 +19,4 @@ void Ctlread(long* X, long* Y, long* button);
 // Output: None
 void CTLRTest(void);
 
+void GameOver(void);

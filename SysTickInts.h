@@ -21,6 +21,8 @@
  For more information about my classes, my research, and my books, see
  http://users.ece.utexas.edu/~valvano/
  */
+void DisableInterrupts(void); // Disable interrupts
+void EnableInterrupts(void); // Enable interrupts
 
 
 extern volatile unsigned long Counts;
@@ -33,3 +35,4 @@ extern volatile unsigned long Counts;
 // Output: none
 void SysTick_Init(unsigned long period);
 
+void Timer0A_Init(void);

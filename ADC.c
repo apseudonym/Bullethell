@@ -13,7 +13,7 @@ int ADCTest(void){
 	while(1);
 }
 
-void InitAdcPorts(void) {
+void ADCInit(void) {
 	SysCtlPeripheralEnable(SYSCTL_PERIPH_ADC);
 	ADCSequenceConfigure(ADC_BASE,0, ADC_TRIGGER_PROCESSOR, 0);
 	ADCSequenceStepConfigure(ADC_BASE, 0, 0, ADC_CTL_CH0);
@@ -21,7 +21,7 @@ void InitAdcPorts(void) {
 	ADCSequenceEnable(ADC_BASE, 0);
 }
 
-void sampleAdcPort(unsigned long* ADCValues) {
+void ADCSample(unsigned long* ADCValues) {
 	ADCProcessorTrigger(ADC_BASE, 0 ); 
 	while(!ADCIntStatus(ADC_BASE, 0, false)); 
 	ADCSequenceDataGet(ADC_BASE, 0, ADCValues);

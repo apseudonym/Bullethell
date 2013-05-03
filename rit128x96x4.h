@@ -59,6 +59,7 @@ extern void RIT128x96x4DisplayOff(void);
 // Prototypes of new functions
 //
 //******************************
+void RIT128x96x4_CheckOverwrite(const unsigned char* bitmap, long x, long y, int* flag);
 void RIT128x96x4_ClearImage(void);
 void RIT128x96x4_SetPixel(int x, int y, unsigned char color);
 unsigned char RIT128x96x4_GetPixel(int x, int y);

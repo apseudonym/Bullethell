@@ -1,7 +1,9 @@
 //*****************************************************************************
 //
 // *NOTE*
-// Functions after "RIT128x96x4DisplayOff" were created by Yifan Weng
+// Functions after "RIT128x96x4DisplayOff" (Excluding RIT128x96x4_LoadImage
+// and RIT128x96x4_CheckOverwrite) were created by Yifan Weng
+// 
 // These functions are part of an open source library created for the
 // RIT 128x96x4 OLED display obtained at http://github.com/weng-frank/RTOS
 //
@@ -34,6 +36,7 @@
 //
 //*****************************************************************************
 
+#include <stdio.h>
 #include "inc/hw_ssi.h"
 #include "inc/hw_memmap.h"
 #include "inc/hw_sysctl.h"
@@ -43,6 +46,7 @@
 #include "driverlib/ssi.h"
 #include "driverlib/sysctl.h"
 #include "rit128x96x4.h"
+#include "output.h"
 
 //*****************************************************************************
 //
@@ -965,9 +969,11 @@ void RIT128x96x4_LoadImage(const unsigned char* bitmap, int x, int y){
  	int i, j, sizeX, sizeY;
 	sizeX = (unsigned long)bitmap[BITMAP_HEIGHT_OFFSET];
   sizeY = (unsigned long)bitmap[BITMAP_WIDTH_OFFSET];
+//	printf("sizeX = %d sizeY = %d",sizeX,sizeY);
 	for(i = 0; i < (sizeX); i++){
-		for(j = 0; j < ((sizeY)>>1); j++){
-			RAMImageBuffer[i+x][j+(y>>1)] = bitmap[BITMAP_HEADER_SIZE + (( NUM_ROWS -i ) * (sizeY>>1)) + j];
+		for(j = 0; j < (sizeY>>1); j++){
+			RAMImageBuffer[i+x][(j+y)&(127)] = bitmap[BITMAP_HEADER_SIZE + (( sizeX - i-1 ) * (sizeY>>1)) + j];
+
 		}
 	}
 }
@@ -982,6 +988,22 @@ void RIT128x96x4_ShowImage(void){
 	RIT128x96x4ImageDraw(RAMImageBuffer[i], 0,i, NUM_COLS, 1);
 }
 
+//*************RIT128x96x4_CheckOverwrite**********************************
+// Checks for overwriting in RAM buffer
+// Useful for hit detection in video games
+
+void RIT128x96x4_CheckOverwrite(const unsigned char* bitmap, long x, long y, int* flag){
+ 	int i, j, sizeX, sizeY;
+	sizeX = (unsigned long)bitmap[BITMAP_HEIGHT_OFFSET];
+  sizeY = (unsigned long)bitmap[BITMAP_WIDTH_OFFSET];
+	for(i = 0; i < (sizeX); i++){
+		for(j = 0; j < (sizeY>>1); j++){	
+			if (RAMImageBuffer[x+i][y+j]){
+			*flag = 1;
+			}
+		}
+	}
+}
 //*****************************************************************************
 //
 // Close the Doxygen group.
