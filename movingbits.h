@@ -2,7 +2,7 @@
 #define NUM_DEATHFAIRIES 1
 #define NUM_MYBULLETS 100
 #define NUM_THEIRBULLETS 100
-#define ENEMYSHOOTSPEED 8
+//#define ENEMYSHOOTSPEED 13
 
 void InitBullets(void);
 void Shoot(int X,int Y);

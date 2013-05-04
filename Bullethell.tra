@@ -20,7 +20,7 @@
 ### ADS-LD Output File: 'Bullethell.axf'
 ### ADS-LD Command File: 'Bullethell.lnp'
 ### Checking for dirty Components...
-### Creating CmdFile 'Bullethell.lnp', Handle=0x000007D0
+### Creating CmdFile 'Bullethell.lnp', Handle=0x000006EC
 ### Writing '.lnp' file
 ### ADS-LD Command file 'Bullethell.lnp' is ready.
 ### ADS-LD: About to start ADS-LD Thread.

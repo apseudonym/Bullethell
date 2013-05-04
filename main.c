@@ -38,6 +38,7 @@ int XPos = 27;
 int YPos = 60;
 int sel;
 int pcheck;
+int ENEMYSHOOTSPEED;
 
 
 long hbox[2];
@@ -367,13 +368,15 @@ int main(void){
 // Changing characters depending on decision
 		if (sel){
 			Avatar.character = reimu;
-			Avatar.speed = 7;
-			Avatar.lives = 5;
+			Avatar.speed = 9;
+			Avatar.lives = 8;
+			ENEMYSHOOTSPEED = 13;
 			}
 		else {
 			Avatar.character = marisa;
-			Avatar.speed = 3;
-			Avatar.lives = 3;
+			Avatar.speed = 13;
+			Avatar.lives = 4;
+			ENEMYSHOOTSPEED = 10;
 			}
 	B = 0;
   Timer0A_Init();

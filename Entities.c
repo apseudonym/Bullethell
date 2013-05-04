@@ -44,24 +44,30 @@ void cirno (long time, long* XPos, long* YPos){
 	}
 }
 
-void bulletl (long time, long* XPos, long* YPos){
+void bulleth (long time, long* XPos, long* YPos, long X, long Y){int slope;
+	slope = ((Y - *YPos)/(X - *XPos));
+	*XPos = time;
+	*YPos = *XPos * slope;
+}
+
+void bulletl (long time, long* XPos, long* YPos, long X, long Y){
 	*XPos = -(time);
 	*YPos = (time*2);
 }
 
-void bulletr (long time, long* XPos, long* YPos){
+void bulletr (long time, long* XPos, long* YPos, long X, long Y){
 	*XPos = time;
 	*YPos = (time*2);
 }
 
-void bullets (long time, long* XPos, long* YPos){
+void bullets (long time, long* XPos, long* YPos, long X, long Y){
 	*XPos = 0;
 	*YPos = (time*2);
 }
 
-const bulletpath enemypaths[] = {bullets, bulletr, bulletl};
+const bulletpath enemypaths[] = {/*bulleth,*/ bullets, bulletr, bulletl};
 
-void playerbullets (long time, long* XPos, long* YPos){
+void playerbullets (long time, long* XPos, long* YPos, long eh, long meh){
 	*XPos = 0;
 	*YPos = -(time*2);
 }

@@ -20,6 +20,7 @@ It is calibrated to provide directional input in terms of positive or negative v
 #include "movingbits.h"
 
 extern const unsigned char hitbox[];
+extern int ENEMYSHOOTSPEED;
 
 unsigned long ADCValues[2];
 
@@ -126,7 +127,7 @@ void Timer0A_Handler(void){int i;
 		if (mybullets[i].time != (-1)){
 			long myx, myy;
 			mybullets[i].time++;
-			mybullets[i].Position(mybullets[i].time,&myx,&myy);
+			mybullets[i].Position(mybullets[i].time,&myx,&myy, 0, 0);
 			RIT128x96x4_SetPixel(mybullets[i].Y+myy, mybullets[i].X+myx, 15);
 			if (mybullets[i].Y+myy < 1){
 				mybullets[i].time = -1;
@@ -162,7 +163,7 @@ void Timer0A_Handler(void){int i;
 		if (theirbullets[i].time != (-1)){
 			long myx, myy;
 			theirbullets[i].time++;
-			theirbullets[i].Position(theirbullets[i].time,&myx,&myy);
+			theirbullets[i].Position(theirbullets[i].time, &myx, &myy, Avatar.X, Avatar.Y);
 			RIT128x96x4_SetPixel(theirbullets[i].Y+myy, theirbullets[i].X+myx, 15);
 			if (theirbullets[i].Y+myy > 90){
 				theirbullets[i].time = -1;
